@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+</head>
+<body>
+    <h1>Welcome to the Index Page</h1>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/login">Login</a> |
+        <a href="/logout">Logout</a> |
+        <a href="/refresh">Refresh Token</a>
+    </nav>
+    
+    <div id="token-data-space">
+        {{ if .IsTokenValid }}
+            <h2>Your Token:</h2>
+            <pre id="token-json">{{ .OAuthToken }}</pre>
+        {{ else }}
+            <p>No token available.</p>
+        {{ end }}
+    </div>
+
+    <script>
+        // Format the token JSON for better readability
+        const tokenDataElement = document.getElementById("token-json");
+        const tokenData = JSON.parse(tokenDataElement.textContent);
+        tokenDataElement.textContent = JSON.stringify(tokenData, null, 2);
+    </script>
+</body>
+</html>
